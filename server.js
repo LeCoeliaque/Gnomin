@@ -185,6 +185,7 @@ function onRejoin(ws, msg) {
   p.ws = ws; p.connected = true;
   if (room.state) { const sp = E.playerById(room.state, p.id); if (sp) sp.connected = true; }
   send(ws, 'joined', { code: room.code, playerId: p.id, hostId: room.hostId });
+  // Always broadcast full state so reconnected player is fully in sync
   broadcast(room);
 }
 
