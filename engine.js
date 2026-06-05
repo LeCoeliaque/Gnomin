@@ -138,7 +138,8 @@ function setupFlip(state, playerId, cellIdx) {
   if (!p) return err('No such player.');
   if (state.setupFlipsRemaining[playerId] <= 0) return err('No setup flips left.');
   const cell = p.grid[cellIdx];
-  if (!cell || cell.faceUp) return err('Pick a face-down card.');
+  if (!cell) return err('Invalid cell.');
+  if (cell.faceUp) return err('That card is already face-up — pick another.');
   cell.faceUp = true;
   state.setupFlipsRemaining[playerId] -= 1;
   if (allSetupDone(state)) {
